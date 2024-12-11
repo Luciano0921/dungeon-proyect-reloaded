@@ -1,6 +1,7 @@
 namespace SpriteKind {
     export const coingram = SpriteKind.create()
     export const GemsPoints = SpriteKind.create()
+    export const HealthPoint = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -194,7 +195,8 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprites.destroy(projectile)
-    sprites.destroy(enemmy)
+    sprites.destroy(sprite)
+    info.changeScoreBy(50)
 })
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     animation.stopAnimation(animation.AnimationTypes.All, Hero)
@@ -689,6 +691,136 @@ function coins () {
         `, SpriteKind.coingram)
     ]
 }
+function Health () {
+    healthList = [
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . f f f f f . f f f f f . . 
+        . . f f 2 2 2 f f f 2 2 2 f f . 
+        . . f 2 2 2 2 2 f 2 2 2 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 2 2 2 2 f . 
+        . . f f 2 2 2 2 2 2 2 2 2 f f . 
+        . . . f f 2 2 2 2 2 2 2 f f . . 
+        . . . . f f 2 2 2 2 2 f f . . . 
+        . . . . . f f 2 2 2 f f . . . . 
+        . . . . . . f f 2 f f . . . . . 
+        . . . . . . . f f f . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.HealthPoint),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . f f f f f . f f f f f . . 
+        . . f f 2 2 2 f f f 2 2 2 f f . 
+        . . f 2 2 2 2 2 f 2 2 2 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 2 2 2 2 f . 
+        . . f f 2 2 2 2 2 2 2 2 2 f f . 
+        . . . f f 2 2 2 2 2 2 2 f f . . 
+        . . . . f f 2 2 2 2 2 f f . . . 
+        . . . . . f f 2 2 2 f f . . . . 
+        . . . . . . f f 2 f f . . . . . 
+        . . . . . . . f f f . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.HealthPoint),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . f f f f f . f f f f f . . 
+        . . f f 2 2 2 f f f 2 2 2 f f . 
+        . . f 2 2 2 2 2 f 2 2 2 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 2 2 2 2 f . 
+        . . f f 2 2 2 2 2 2 2 2 2 f f . 
+        . . . f f 2 2 2 2 2 2 2 f f . . 
+        . . . . f f 2 2 2 2 2 f f . . . 
+        . . . . . f f 2 2 2 f f . . . . 
+        . . . . . . f f 2 f f . . . . . 
+        . . . . . . . f f f . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.HealthPoint),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . f f f f f . f f f f f . . 
+        . . f f 2 2 2 f f f 2 2 2 f f . 
+        . . f 2 2 2 2 2 f 2 2 2 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 2 2 2 2 f . 
+        . . f f 2 2 2 2 2 2 2 2 2 f f . 
+        . . . f f 2 2 2 2 2 2 2 f f . . 
+        . . . . f f 2 2 2 2 2 f f . . . 
+        . . . . . f f 2 2 2 f f . . . . 
+        . . . . . . f f 2 f f . . . . . 
+        . . . . . . . f f f . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.HealthPoint),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . f f f f f . f f f f f . . 
+        . . f f 2 2 2 f f f 2 2 2 f f . 
+        . . f 2 2 2 2 2 f 2 2 2 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 2 2 2 2 f . 
+        . . f f 2 2 2 2 2 2 2 2 2 f f . 
+        . . . f f 2 2 2 2 2 2 2 f f . . 
+        . . . . f f 2 2 2 2 2 f f . . . 
+        . . . . . f f 2 2 2 f f . . . . 
+        . . . . . . f f 2 f f . . . . . 
+        . . . . . . . f f f . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.HealthPoint),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . f f f f f . f f f f f . . 
+        . . f f 2 2 2 f f f 2 2 2 f f . 
+        . . f 2 2 2 2 2 f 2 2 2 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 2 2 2 2 f . 
+        . . f f 2 2 2 2 2 2 2 2 2 f f . 
+        . . . f f 2 2 2 2 2 2 2 f f . . 
+        . . . . f f 2 2 2 2 2 f f . . . 
+        . . . . . f f 2 2 2 f f . . . . 
+        . . . . . . f f 2 f f . . . . . 
+        . . . . . . . f f f . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.HealthPoint),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . f f f f f . f f f f f . . 
+        . . f f 2 2 2 f f f 2 2 2 f f . 
+        . . f 2 2 2 2 2 f 2 2 2 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 1 1 2 2 f . 
+        . . f 2 2 2 2 2 2 2 2 2 2 2 f . 
+        . . f f 2 2 2 2 2 2 2 2 2 f f . 
+        . . . f f 2 2 2 2 2 2 2 f f . . 
+        . . . . f f 2 2 2 2 2 f f . . . 
+        . . . . . f f 2 2 2 f f . . . . 
+        . . . . . . f f 2 f f . . . . . 
+        . . . . . . . f f f . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.HealthPoint)
+    ]
+}
 function xvelocity () {
     if (east) {
         return -100
@@ -753,6 +885,7 @@ let west = false
 let projectile: Sprite = null
 let south = false
 let north = false
+let healthList: Sprite[] = []
 let gemList: Sprite[] = []
 let coinlist: Sprite[] = []
 let winPoints = false
@@ -795,4 +928,7 @@ for (let value of coinlist) {
 }
 for (let value of gemList) {
     tiles.placeOnRandomTile(value, sprites.dungeon.stairLadder)
+}
+for (let value of healthList) {
+    tiles.placeOnRandomTile(value, sprites.swamp.swampTile1)
 }
