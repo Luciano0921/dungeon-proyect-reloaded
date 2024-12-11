@@ -1,3 +1,7 @@
+namespace SpriteKind {
+    export const coingram = SpriteKind.create()
+    export const GemsPoints = SpriteKind.create()
+}
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     Hero,
@@ -75,6 +79,10 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     )
     north = true
     south = false
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.GemsPoints, function (sprite, otherSprite) {
+    info.changeScoreBy(200)
+    sprites.destroy(otherSprite, effects.starField, 100)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     projectile = sprites.createProjectileFromSprite(img`
@@ -191,9 +199,197 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, oth
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     animation.stopAnimation(animation.AnimationTypes.All, Hero)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.coingram, function (sprite, otherSprite) {
+    info.changeScoreBy(500)
+    sprites.destroy(otherSprite, effects.starField, 100)
+})
 controller.left.onEvent(ControllerButtonEvent.Released, function () {
     animation.stopAnimation(animation.AnimationTypes.All, Hero)
 })
+function gems () {
+    gemList = [
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . 9 3 1 9 . . . . . . 
+        . . . . . . 9 3 3 9 . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.GemsPoints),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . 9 3 1 9 . . . . . . 
+        . . . . . . 9 3 3 9 . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.GemsPoints),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . 9 3 1 9 . . . . . . 
+        . . . . . . 9 3 3 9 . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.GemsPoints),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . 9 3 1 9 . . . . . . 
+        . . . . . . 9 3 3 9 . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.GemsPoints),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . 9 3 1 9 . . . . . . 
+        . . . . . . 9 3 3 9 . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.GemsPoints),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . 9 3 1 9 . . . . . . 
+        . . . . . . 9 3 3 9 . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.GemsPoints),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . 9 3 1 9 . . . . . . 
+        . . . . . . 9 3 3 9 . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.GemsPoints),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . 9 3 1 9 . . . . . . 
+        . . . . . . 9 3 3 9 . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.GemsPoints),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . 9 3 1 9 . . . . . . 
+        . . . . . . 9 3 3 9 . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.GemsPoints),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . 9 3 1 9 . . . . . . 
+        . . . . . . 9 3 3 9 . . . . . . 
+        . . . . . . 8 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.GemsPoints)
+    ]
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     Hero,
@@ -372,9 +568,127 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     south = true
     north = false
 })
-info.onScore(5, function () {
-    game.gameOver(true)
+function StartingName () {
+    playerName = game.askForString("what is your name", 8)
+    game.splash("Hello" + playerName)
+    game.splash("Collect the coins ans beat the boss")
+    game.splash("Don't die, Good luck " + playerName)
+}
+info.onScore(5000, function () {
+    exit = sprites.create(img`
+        c b d d d d d d d d d d d d d d 
+        c b d d d d d d d d d d d d d d 
+        c b c c b c c b c c b c c b c c 
+        c d b c d b c d b c d b c d b c 
+        c d b c d b c d b c d b c d b c 
+        c d b c d b c d b c d b c d b c 
+        c d b c d b c d b c d b c d b c 
+        c d b c d b c d b c d b c d b c 
+        c d b c d b c d b c d b c d b c 
+        c d b c d b c d b c d b c d b c 
+        c d b c d b c d b c d b c d b c 
+        c d b c d b c d b c d b c d b c 
+        c d b c d b c d b c d b c d b c 
+        c b c c b c c b c c b c c b c c 
+        c b d d d d d d d d d d d d d d 
+        c b d d d d d d d d d d d d d d 
+        `, SpriteKind.Player)
+    tiles.placeOnRandomTile(exit, sprites.dungeon.stairWest)
 })
+function coins () {
+    coinlist = [
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . f f f f f f f . . . . 
+        . . . . f 5 5 5 5 5 5 5 f . . . 
+        . . . f 5 5 5 5 5 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 5 5 5 5 5 f . . 
+        . . . . f 5 5 5 5 5 5 5 f . . . 
+        . . . . . f f f f f f f . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.coingram),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . f f f f f f f . . . . 
+        . . . . f 5 5 5 5 5 5 5 f . . . 
+        . . . f 5 5 5 5 5 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 5 5 5 5 5 f . . 
+        . . . . f 5 5 5 5 5 5 5 f . . . 
+        . . . . . f f f f f f f . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.coingram),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . f f f f f f f . . . . 
+        . . . . f 5 5 5 5 5 5 5 f . . . 
+        . . . f 5 5 5 5 5 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 5 5 5 5 5 f . . 
+        . . . . f 5 5 5 5 5 5 5 f . . . 
+        . . . . . f f f f f f f . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.coingram),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . f f f f f f f . . . . 
+        . . . . f 5 5 5 5 5 5 5 f . . . 
+        . . . f 5 5 5 5 5 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 5 5 5 5 5 f . . 
+        . . . . f 5 5 5 5 5 5 5 f . . . 
+        . . . . . f f f f f f f . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.coingram),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . f f f f f f f . . . . 
+        . . . . f 5 5 5 5 5 5 5 f . . . 
+        . . . f 5 5 5 5 5 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 f 5 5 5 5 f . . 
+        . . . f 5 5 5 5 5 5 5 5 5 f . . 
+        . . . . f 5 5 5 5 5 5 5 f . . . 
+        . . . . . f f f f f f f . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.coingram)
+    ]
+}
 function xvelocity () {
     if (east) {
         return -100
@@ -431,17 +745,24 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         myEnemy = false
     }
 })
+let exit: Sprite = null
+let playerName = ""
 let enemmy: Sprite = null
 let east = false
 let west = false
 let projectile: Sprite = null
 let south = false
 let north = false
+let gemList: Sprite[] = []
+let coinlist: Sprite[] = []
 let winPoints = false
 let myEnemy = false
 let gamepoints = false
 let spawned = false
 let Hero: Sprite = null
+StartingName()
+gems()
+coins()
 Hero = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f f 2 2 f f f . . . . 
@@ -460,9 +781,6 @@ Hero = sprites.create(img`
     . . . . . f f f f f f . . . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
-Hero.sayText("I need to collect ALL the fires", 500, false)
-Hero.sayText("I need to collect ALL the fires", 500, false)
-Hero.sayText("I need to collect ALL the fires", 500, false)
 tiles.setCurrentTilemap(tilemap`level2`)
 controller.moveSprite(Hero)
 scene.cameraFollowSprite(Hero)
@@ -472,3 +790,9 @@ spawned = false
 gamepoints = false
 myEnemy = false
 winPoints = false
+for (let value of coinlist) {
+    tiles.placeOnRandomTile(value, sprites.dungeon.chestOpen)
+}
+for (let value of gemList) {
+    tiles.placeOnRandomTile(value, sprites.dungeon.stairLadder)
+}
